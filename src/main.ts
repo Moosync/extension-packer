@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import path from 'path'
@@ -12,4 +14,3 @@ const outputFile = await validateManifest(extPath)
 if (outputFile) {
     await generateZip(extPath, outputFile)
 }
-

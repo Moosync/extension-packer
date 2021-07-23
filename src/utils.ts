@@ -7,14 +7,13 @@ type manifest = { extensionEntry?: string, moosyncExtension?: string, packageNam
 export async function validateManifest(basePath: string): Promise<string> {
     const manifestPath = path.join(basePath, 'package.json')
     try {
-
         // check if package.json exists
-        fsP.access(manifestPath)
-
+        await fsP.access(manifestPath)
         const parsedManifest = await parseManifest(manifestPath)
+        await fsP.access(parsedManifest.extensionEntry)
         return generateFileName(basePath, parsedManifest)
     } catch (e) {
-        console.error("Unable to parse package.json", e)
+        console.error("Unable to parse package.json", (e as Error).message)
     }
     return ''
 }
@@ -30,7 +29,7 @@ export async function generateZip(basePath: string, target: string) {
     zip.pipe(output)
     zip.glob(`**/*`, {
         cwd: basePath,
-        ignore: ['node_modules/**', '.git/**', '*.lock', '*.zip']
+        ignore: ['node_modules/**', '.git/**', '*.lock', '*.zip', '*.msox']
     })
     await zip.finalize()
 }
