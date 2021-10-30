@@ -4,3 +4,4 @@ yarn.lock
 .eslint*
 .git/
 .vscode/
+webpack.config.js
