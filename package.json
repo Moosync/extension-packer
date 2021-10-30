@@ -1,6 +1,6 @@
 {
     "name": "@moosync/packer",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Pack extensions for moosync",
     "main": "dist/main.js",
     "bin": {
