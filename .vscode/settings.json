@@ -29,6 +29,13 @@
   ],
   "appService.deploySubpath": "",
   "cSpell.words": [
+    "mopack",
     "yarg"
-  ]
+  ],
+  "markdownlint.config": {
+    "MD028": false,
+    "MD025": {
+      "front_matter_title": ""
+    }
+  }
 }

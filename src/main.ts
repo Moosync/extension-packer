@@ -3,17 +3,19 @@
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import path from "path";
-import { generateZip, validateManifest, generateFileName } from "./utils.js";
+import { generateZip, validateManifest, generateFileName } from "./utils";
 
-const yarg = yargs(hideBin(process.argv));
-const args = yarg.command("path", "Path of extension").alias("p", "path").argv;
+const yarg = yargs(hideBin(process.argv)).options({
+    path: { type: "string", default: "", alias: "p", describe: "Path of extension"}
+});
 
-const extPath = path.resolve(process.cwd(), (await args)["path"] as string);
+const extPath = path.resolve(process.cwd(), yarg.parseSync().path);
 
-const manifest = await validateManifest(extPath);
-if (manifest) {
-    const outputFile = await generateFileName(extPath, manifest);
-    if (outputFile) {
-        await generateZip(extPath, outputFile, manifest.mopack);
+validateManifest(extPath).then(manifest => {
+    if (manifest) {
+        const outputFile = generateFileName(extPath, manifest);
+        if (outputFile) {
+            generateZip(extPath, outputFile, manifest.mopack);
+        }
     }
-}
+});
