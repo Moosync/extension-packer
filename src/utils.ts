@@ -19,11 +19,11 @@ export async function validateManifest(basePath: string): Promise<manifest> {
     return {};
 }
 
-export function generateFileName(basePath: string, manifest: manifest) {
+export function generateFileName(basePath: string, manifest: manifest): string {
     return path.join(basePath, `${manifest.name}-${manifest.version}.msox`);
 }
 
-export async function generateZip(basePath: string, target: string, options?: mopackOptions) {
+export async function generateZip(basePath: string, target: string, options?: mopackOptions): Promise<void> {
     await removeFileIfExists(target);
     const output = createWriteStream(target);
     const zip = archiver("zip", { store: true });
@@ -59,7 +59,7 @@ async function removeFileIfExists(filePath: string) {
     }
 }
 
-function implementsTKeys<T>(obj: any, keys: string[]): obj is T {
+function implementsTKeys<T>(obj: T, keys: string[]): obj is T {
     if (!obj || !Array.isArray(keys)) {
         return false;
     }
