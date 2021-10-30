@@ -12,7 +12,7 @@ const yarg = yargs(hideBin(process.argv)).options({
 const extPath = path.resolve(process.cwd(), yarg.parseSync().path);
 
 validateManifest(extPath).then(manifest => {
-    if (manifest) {
+    if (manifest && manifest.name) {
         const outputFile = generateFileName(extPath, manifest);
         if (outputFile) {
             generateZip(extPath, outputFile, manifest.mopack);
