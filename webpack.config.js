@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 var path = require("path");
+const ShebangPlugin = require("webpack-shebang-plugin");
+
 
 module.exports = {
     entry: "./src/main.ts",
@@ -11,6 +13,7 @@ module.exports = {
         libraryTarget: "commonjs2",
         libraryExport: "default",
     },
+    plugins: [new ShebangPlugin()],
     resolve: {
         extensions: [".ts", ".js"]
     },
