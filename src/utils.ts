@@ -11,7 +11,7 @@ export async function validateManifest(basePath: string): Promise<manifest> {
         // check if package.json exists
         await fsP.access(manifestPath);
         const parsedManifest = await parseManifest(manifestPath);
-        await fsP.access(parsedManifest.extensionEntry);
+        await fsP.access(path.resolve(basePath, parsedManifest.extensionEntry))
         return parsedManifest;
     } catch (e) {
         console.error("Unable to parse package.json", (e as Error).message);
