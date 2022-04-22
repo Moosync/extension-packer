@@ -6,7 +6,7 @@ import path from "path";
 import { generateZip, validateManifest, generateFileName } from "./utils";
 
 const yarg = yargs(hideBin(process.argv)).options({
-    path: { type: "string", default: "--path", alias: "p", describe: "Path of extension"}
+    path: { type: "string", default: ".", alias: "p", describe: "Path of extension"}
 });
 
 const extPath = path.resolve(process.cwd(), yarg.parseSync().path);
